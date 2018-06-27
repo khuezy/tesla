@@ -1,0 +1,26 @@
+const tesla = require('tesla-api')
+
+class Tesla {
+  vehicle = null
+  constructor() {
+    this.unlockDoor = this.unlockDoor.bind(this)
+
+    this.init()
+  }
+
+  async init() {
+    const vehicles = await tesla.login({
+      email: process.env.TESLA_EMAIL,
+      password: proncess.env.TESLA_PASSWORD
+    })
+
+    this.vehicle = vehicles[0]
+    console.log(this.vehicle)
+  }
+
+  unlockDoor() {
+    this.vehicle.doorUnlock()
+  }
+}
+
+module.exports = new Tesla()
