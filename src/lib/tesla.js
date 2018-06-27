@@ -10,7 +10,7 @@ class Tesla {
   async init() {
     const vehicles = await tesla.login({
       email: process.env.TESLA_EMAIL,
-      password: proncess.env.TESLA_PASSWORD
+      password: process.env.TESLA_PASSWORD
     })
 
     this.vehicle = vehicles[0]
