@@ -1,7 +1,6 @@
 const tesla = require('tesla-api')
 
 class Tesla {
-  vehicle = null
   constructor() {
     this.unlockDoor = this.unlockDoor.bind(this)
 
