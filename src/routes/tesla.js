@@ -8,10 +8,10 @@ routes.put('/door', async (req, res) => {
     const car = await Tesla.getVehicle()
     switch (state) {
       case 'lock':
-        car.doorLock()
+        await car.doorLock()
         break
       case 'unlock':
-        car.doorUnlock()
+        await car.doorUnlock()
         break
       default:
         console.log('Default')
@@ -32,10 +32,10 @@ routes.put('/port', async (req, res) => {
   const car = await Tesla.getVehicle()
   switch (state) {
     case 'lock':
-      car.doorLock()
+      await car.doorLock()
       break
     case 'unlock':
-      car.chargePortDoorOpen()
+      await car.chargePortDoorOpen()
       break
     default:
       console.log('Default')
