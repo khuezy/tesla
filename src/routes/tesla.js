@@ -4,20 +4,25 @@ const Tesla = require('../lib/tesla')
 
 routes.put('/door', async (req, res) => {
   const {state} = req.body
+  try {
+    const car = await Tesla.getVehicle()
+    switch (state) {
+      case 'lock':
+        car.doorLock()
+        break
+      case 'unlock':
+        car.doorUnlock()
+        break
+      default:
+        console.log('Default')
+    }
+    res.send({success: true, message: 'ok'})
 
-  const car = await Tesla.getVehicle()
-  switch (state) {
-    case 'lock':
-      car.doorLock()
-      break
-    case 'unlock':
-      car.doorUnlock()
-      break
-    default:
-      console.log('Default')
+  } catch(err) {
+    console.log(err.status, err.message)
+    res.send({success: false, message: err})
   }
 
-  res.send({success: true, message: 'ok'})
 
 })
 
