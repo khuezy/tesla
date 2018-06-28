@@ -21,4 +21,22 @@ routes.put('/door', async (req, res) => {
 
 })
 
+routes.put('/port', async (req, res) => {
+  const {state} = req.body
+
+  const car = await Tesla.getVehicle()
+  switch (state) {
+    case 'lock':
+      car.doorLock()
+      break
+    case 'unlock':
+      car.chargePortDoorOpen()
+      break
+    default:
+      console.log('Default')
+  }
+
+  res.send({success: true, message: 'ok'})
+
+})
 module.exports = routes
