@@ -1,16 +1,24 @@
 const routes = require('express').Router()
 
-const tesla = require('../lib/tesla')
+const Tesla = require('../lib/tesla')
 
-routes.put('/unlock', (req, res) => {
-  const response = tesla.unlockDoor()
+routes.put('/door', async (req, res) => {
+  const {state} = req.body
 
-  if (response.success) {
-    res.send(response)
-  } else {
-    res.status(400)
-    res.send(response)
+  const car = await Tesla.getVehicle()
+  switch (state) {
+    case 'lock':
+      car.doorLock()
+      break
+    case 'unlock':
+      car.doorUnlock()
+      break
+    default:
+      console.log('Default')
   }
+
+  res.send({success: true, message: 'ok'})
+
 })
 
 module.exports = routes

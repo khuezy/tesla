@@ -7,8 +7,12 @@ const jsonParser = bodyParse.json()
 
 const routes = require('./src/routes/tesla')
 
+process.on('uncaughtException', (a,b,c) => {
+  console.log(a,b,c)
+})
+
 app.use('/api', jsonParser, routes)
 
-app.listen(9999, () => {
-  console.log('Listening on 9999...')
+app.listen(3333, () => {
+  console.log('Listening on 3333...')
 })
